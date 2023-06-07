@@ -7,7 +7,6 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="{% static 'main/css/header.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}">
 
     <title>{% block title %}{% endblock %}</title>
@@ -15,14 +14,18 @@
 </head>
 <body>
 
+{% block content %}
+
+{% endblock %}
 
 
-
-<div class="content">
-    {% block content %}
-
-    {% endblock %}
+<div class="main_box">
+    <h1 class="name">ИНГОЗДРАВ</h1>
+    <a href="{% url 'sign_up' %}" class="sign_up_box">Зарегистрироваться</a>
+    <a href="{% url 'sign_in' %}" class="sign_in_box">Войти</a>
 </div>
+
+
 
 </body>
 </html>
