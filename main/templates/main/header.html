@@ -20,9 +20,16 @@
 
 
 <div class="main_box">
-    <h1 class="name">ИНГОЗДРАВ</h1>
-    <a href="{% url 'sign_up' %}" class="sign_up_box">Зарегистрироваться</a>
-    <a href="{% url 'sign_in' %}" class="sign_in_box">Войти</a>
+    {% if is_main %}
+        <a class="name" href="{% url 'main' %}">ИНГОЗДРАВ</h1>
+        <a href="{% url 'sign_up' %}" class="sign_up_box">Зарегистрироваться</a>
+        <a href="{% url 'sign_in' %}" class="sign_in_box">Войти</a>
+    {% else %} 
+        
+        <a class="name_not_main" href="{% url 'main' %}">ИНГОЗДРАВ</h1>
+        <a href="{% url 'sign_up' %}" class="sign_up_box_not_main">Зарегистрироваться</a>
+        <a href="{% url 'sign_in' %}" class="sign_in_box_not_main">Войти</a>
+    {% endif %}
 </div>
 
 

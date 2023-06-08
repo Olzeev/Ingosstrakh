@@ -11,8 +11,18 @@
 {% block content %}
 {% csrf_token %}
 
-<h1>Вход</h1>
 
+<div class="sign_in_main_box">
+    <h1 class="sign_in_main_title">Вход</h1>
+    <h2 class="sign_in_title">в личный кабинет</h2>
+    <input placeholder="Эл. почта, номер телефона" class="sign_in_input">
+    <input placeholder="Пароль" class="sign_in_input">
+    <button class="sign_in_button">
+        <p>Войти</p>
+    </button>
+    <p class="sign_in_text">Еще нет личного кабинета?</p>
+    <a class="sign_in_text" href="{% url 'sign_up' %}">Зарегистрироваться</a>
+</div>
 
 
 {% endblock %}
