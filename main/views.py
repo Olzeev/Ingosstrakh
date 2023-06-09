@@ -29,5 +29,8 @@ def personal_area_log(request):
     return render(request, 'main/personal_area_log.html', {'is_main': False, 
                                                            'chosen': 4})
 
+def personal_area_quit(request):
+    return render(request, 'main/index.html', {"is_main": True})
+
 def check_sign_up(request):
     pass
