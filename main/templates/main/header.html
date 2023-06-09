@@ -10,14 +10,13 @@
     <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}">
 
     <title>{% block title %}{% endblock %}</title>
-    <link rel="shortcut icon" type="image/png" href="{% static 'main/png/favicon.png' %}"/>
+    <link rel="icon" type="image/x-icon" href="{% static 'main/png/favicon.png' %}"/>
 </head>
 <body>
 
 {% block content %}
 
 {% endblock %}
-
 
 <div class="main_box">
     {% if is_main %}
@@ -31,8 +30,6 @@
         <a href="{% url 'sign_in' %}" class="sign_in_box_not_main">Войти</a>
     {% endif %}
 </div>
-
-
 
 </body>
 </html>

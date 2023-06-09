@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Inter'; /*a name to be used later*/
+    src: url('../fonts/Inter/Inter-Regular.ttf'); /*URL to font*/
+}
+
 .main_box{
     top: 0px;
     display: flex;
@@ -190,4 +195,56 @@
     margin: auto;
     box-shadow: 0 0 10px grey;
     border-radius: 20px;
+}
+
+.personal_area_main_box{
+    position: relative;
+    top: 70px;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+.personal_area_list_button{
+    display: flex;
+    width: 90%;
+    height: 40px;
+    margin-top: 10px;
+    font-family: 'Inter';
+}
+.personal_area_list_button a{
+    position: relative;
+    top: 10px;
+    left: 10px;
+    text-decoration: none;
+    color: black;
+}
+.personal_area_list_button a:hover{
+    color: #165ab7;
+}
+
+.personal_area_list_button_chosen{
+    display: flex;
+    width: 90%;
+    height: 40px;
+    margin-top: 10px;
+    font-family: 'Inter';
+}
+
+.personal_area_list_button_chosen a{
+    position: relative;
+    top: 10px;
+    left: 10px;
+    text-decoration: none;
+    color: #165ab7;
+}
+.personal_area_list_button_chosen a:hover{
+    color: #0d3772;
+}
+
+.personal_area_list_button_image{
+    display: block;
+    position: relative;
+    top: 5px;
+    width: 30px;
+    height: 30px;
 }

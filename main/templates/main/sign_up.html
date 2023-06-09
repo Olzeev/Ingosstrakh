@@ -14,12 +14,15 @@
 <div class="sign_up_main_box">
     <h1 class="sign_in_main_title">Создать</h1>
     <h2 class="sign_in_title">личный кабинет</h2>
-    <input placeholder="Эл. почта, номер телефона" class="sign_in_input">
-    <input placeholder="Пароль" class="sign_in_input">
-    <input placeholder="Подтверждение пароля" class="sign_in_input">
-    <button class="sign_in_button">
-        <p>Создать</p>
-    </button>
+    <form method="post" action="check_sign_up">
+        {% csrf_token %}
+        <input placeholder="Эл. почта, номер телефона" class="sign_in_input" name="mail">
+        <input placeholder="Пароль" class="sign_in_input" name="password1">
+        <input placeholder="Подтверждение пароля" class="sign_in_input" name="password2">
+        <button class="sign_in_button" type="submit">
+            <p>Создать</p>
+        </button>
+    </form>
     <p class="sign_in_text">Уже есть личный кабинет?</p>
     <a class="sign_in_text" href="{% url 'sign_in' %}">Войти</a>
 </div>
