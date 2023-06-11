@@ -43,7 +43,7 @@ def sign_up(request):
                                                                  "form": SignUpForm(), 
                                                                  "title": get_title(request)})
             
-            user = models.User.objects.create_user(form.data["email"], form.data["password"])
+            user = models.User.objects.create_user(username=form.data["email"], password=form.data["password"])
             login(request, user)
             return redirect('main')
     else:
