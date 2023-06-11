@@ -122,7 +122,7 @@
     display: block;
     width: 400px;
     
-    height: 400px;
+    height: 460px;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -194,7 +194,7 @@
     display: block;
     width: 400px;
     
-    height: 470px;
+    height: 530px;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -203,6 +203,13 @@
     margin: auto;
     box-shadow: 0 0 10px grey;
     border-radius: 20px;
+}
+
+.error_message{
+    position: relative;
+    text-align: center;
+    font-family: 'Inter';
+    color: red;
 }
 
 .personal_area_main_box{

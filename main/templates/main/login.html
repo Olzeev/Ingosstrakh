@@ -1,0 +1,38 @@
+{% extends 'main/header.html' %}
+
+{% load static %}
+
+{% block title %}
+Вход в личный кабинет
+{% endblock %}
+
+
+
+{% block content %}
+{% csrf_token %}
+
+
+<div class="sign_in_main_box">
+    <h1 class="sign_in_main_title">Вход</h1>
+    <h2 class="sign_in_title">в личный кабинет</h2>
+    
+    <form method="post" action="{% url 'sign_in' %}">
+        
+        {% csrf_token %}
+        
+        <input name="email" type="email" placeholder="Логин" maxlength="30" class="sign_in_input">
+        <input name="password" type="password" placeholder="Пароль" maxlength="30" class="sign_in_input">
+        {% if error %}
+            <p class="error_message">{{ error }}</p>
+        {% endif %}
+        <button class="sign_in_button" type="submit">
+            <p>Войти</p>
+        </button>
+    </form>
+
+    <p class="sign_in_text">Еще нет личного кабинета?</p>
+    <a class="sign_in_text" href="{% url 'sign_up' %}">Зарегистрироваться</a>
+</div>
+
+
+{% endblock %}
