@@ -12,7 +12,23 @@
 
 
 {% block personal_area_content %}
-<h1>Hello</h1>
+<div class="personal_area_log_content">
+    <h2 class="personal_area_title">Журнал отчетов</h2>
+    {% for report in reports %}
+        <div class="log_report">
+            <h3 class="log_report_title">{{ report.report_datetime.day }}.{{ report.report_datetime.month }}.{{ report.report_datetime.year }} {{ report.report_datetime.hour}}:{{ report.report_datetime.minute }} </h3>
+            
+            <div class="log_report_info">
+                <img src="{% static 'main/png/heartbeat.png' %}" class="log_report_image">
+                <p>{{ report.pulse }}</p>
+                <img src="{% static 'main/png/pressure.png' %}" class="log_report_image" style="left: 100px">
+                <p style="left: 120px;">{{ report.preassure2 }}/{{ report.preassure1 }}</p>
+            </div>
+            
+        </div>
+    {% endfor %}
+</div>
+
 
 
 {% endblock %}

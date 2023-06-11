@@ -8,11 +8,25 @@
 
 
 
-
-
-
 {% block personal_area_content %}
-<h1>Hello</h1>
 
+<div class="send_report_main_box">
+    <h2>Отправить отчет за {{ datetime.day }}.{{ datetime.month }}.{{ datetime.year }} ({{ datetime.hour }}:{{ datetime.minute }})</h2>
+    <form method="POST" action="{% url 'area3' %}">
+        {% csrf_token %}
+        <input type="number" min=10 max=250 name="pulse" placeholder="Пульс" class="report_pulse_input">
+        <p>Давление:</p>
+        <div style="display: flex;">
+            <input type="number" min=10 max=400 name="preassure2" placeholder="Верхнее" class="report_preassure_input">
+            <input type="number" min=10 max=400 name="preassure1" placeholder="Нижнее" class="report_preassure_input" style="margin-left: 10px">
+        </div>
+        <p style="color: red;">{{ error }}</p>
+        
+        <button type="submit" class="send_report_button">
+            <p>Отправить</p>
+        </button>
+        <p style="position: relative; top: 20px">Если вы еще не отправляли отчет сегодня, то сделайте это через час.</p>
+    </form>
+</div>
 
 {% endblock %}

@@ -79,3 +79,26 @@ class EditInfoForm(forms.Form):
                 "maxlength": 3
             })
         }
+
+
+class ReportForm(forms.Form):
+    class Meta:
+        fields = ["pulse", "preassure1", "preassure2"]
+
+        widgets = {
+            "pulse": forms.TextInput(attrs={
+                "class": "report_pulse_input", 
+                "placeholder": "Пульс", 
+                "type": "number"
+            }), 
+            "preassure1": forms.TextInput(attrs={
+                "class": "report_preassure_input", 
+                "placeholder": "Верхнее", 
+                "type": "number"
+            }), 
+            "preassure2": forms.TextInput(attrs={
+                "class": "report_preassure_input", 
+                "placeholder": "Нижнее", 
+                "type": "number"
+            }), 
+        }

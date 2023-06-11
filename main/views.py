@@ -126,15 +126,39 @@ def personal_area_edit_info(request):
                                                                  "birth_date": str(user_info.birth_date), 
                                                                  "gender": user_info.gender})
 
+
 def personal_area_send_report(request):
+    error = ''
+    if request.method == "POST":
+        form = ReportForm(request.POST)
+        
+        if form.is_valid():
+            pulse = form.data["pulse"]
+            preassure1 = form.data["preassure1"]
+            preassure2 = form.data["preassure2"]
+            if pulse and preassure1 and preassure2:
+                Report = MedicalInfo(username=request.user.username, pulse=pulse, preassure1=preassure1, preassure2=preassure2, report_datetime=datetime.now())
+                Report.save()
+                return redirect('area1')
+            else:
+                error = 'Заполните все данные!'
+        else:
+            error = 'Форма некорректна!'
+    else:
+        form = ReportForm()
     return render(request, 'main/personal_area_send_report.html', {'is_main': False, 
                                                                  'chosen': 3, 
-                                                                 "title": get_title(request)})
+                                                                 "title": get_title(request), 
+                                                                 "form": form, 
+                                                                 "error": error, 
+                                                                 "datetime": datetime.now()})
 
 def personal_area_log(request):
+    reports = MedicalInfo.objects.filter(username=request.user.username).order_by("-report_datetime")
     return render(request, 'main/personal_area_log.html', {'is_main': False, 
                                                            'chosen': 4, 
-                                                           "title": get_title(request)})
+                                                           "title": get_title(request), 
+                                                           "reports": reports})
 
 def personal_area_quit(request):
     logout(request)
