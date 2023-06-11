@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login, logout, models, get_user_model
+from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth import models as django_models
 from .forms import *
+from .models import *
 
 
 def get_title(request):
@@ -43,8 +45,10 @@ def sign_up(request):
                                                                  "form": SignUpForm(), 
                                                                  "title": get_title(request)})
             
-            user = models.User.objects.create_user(username=form.data["email"], password=form.data["password"])
+            user = django_models.User.objects.create_user(username=form.data["email"], password=form.data["password"])
             login(request, user)
+            user_info = UserInfo(username=form.data["email"])
+            user_info.save()
             return redirect('main')
     else:
         form = SignUpForm()
@@ -87,21 +91,36 @@ def personal_area_edit_info(request):
             user.first_name = name
             user.last_name = second_name
             user.email = last_name
+            user.save()
 
             gender = form.data["gender"]
+            
             birth_date = form.data["birth_date"]
             weight = form.data["weight"]
-            user.save()
-            print(gender, birth_date, weight)    
+            user_info = UserInfo.objects.get(username=request.user.username)
+            user_info.gender = False if gender == 'Мужской' else True
+            if birth_date:
+                user_info.birth_date = str(birth_date)
+            if weight:
+                user_info.weight = weight
+            user_info.save()
+
+            
+            
             return redirect('area1') 
     else:
         form = EditInfoForm()
+
+    user_info = UserInfo.objects.get(username=request.user.username)
 
     return render(request, 'main/personal_area_edit_info.html', {'is_main': False, 
                                                                  'chosen': 2, 
                                                                  "title": get_title(request), 
                                                                  "form": form, 
-                                                                 "user": request.user})
+                                                                 "user": request.user, 
+                                                                 "weight": user_info.weight, 
+                                                                 "birth_date": str(user_info.birth_date), 
+                                                                 "gender": user_info.gender})
 
 def personal_area_send_report(request):
     return render(request, 'main/personal_area_send_report.html', {'is_main': False, 
