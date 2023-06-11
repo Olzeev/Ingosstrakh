@@ -49,7 +49,7 @@ def sign_up(request):
             login(request, user)
             user_info = UserInfo(username=form.data["email"])
             user_info.save()
-            return redirect('main')
+            return redirect('area2')
     else:
         form = SignUpForm()
     return render(request, 'main/sign_up.html', {"is_main": False, 
@@ -76,9 +76,13 @@ def sign_in(request):
                                                "title": get_title(request)})
 
 def personal_area_main(request):
+    user_info = UserInfo.objects.get(username=request.user.username)
     return render(request, 'main/personal_area.html', {'is_main': False,
                                                        'chosen': 1, 
-                                                       "title": get_title(request)})
+                                                       "title": get_title(request), 
+                                                       "gender": "мужской" if not user_info.gender else "женский", 
+                                                       "birth_date": str(user_info.birth_date), 
+                                                       "weight": user_info.weight})
 
 def personal_area_edit_info(request):
     if request.method == "POST":
