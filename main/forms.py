@@ -45,6 +45,37 @@ class SignUpForm(forms.Form):
             })
         }
 
-    #email = forms.EmailField(label='Email', max_length=30)
-    #password = forms.CharField(label='Password', max_length=30)
-    #password_check = forms.CharField(label='Password', max_length=30)
+    
+class EditInfoForm(forms.Form):
+    class Meta:
+        fields = ["second_name", "name", "last_name", "gender", "age", "weight"]
+
+        widgets = {
+            "second_name": forms.TextInput(attrs={
+                "class": "edit_info_name",
+                "placeholder": "Фамилия", 
+                "type": "text", 
+                "maxlength": "30"
+            }),
+            "name": forms.TextInput(attrs={
+                "class": "edit_info_name", 
+                "placeholder": "Имя", 
+                "type": "text", 
+                "maxlength": "30"
+            }),
+            "last_name": forms.TextInput(attrs={
+                "class": "edit_info_name", 
+                "placeholder": "Отчество", 
+                "type": "text", 
+                "maxlength": "30"
+            }), 
+            "gender": forms.Select(), 
+            "birth_date": forms.DateInput(attrs={
+                "class": "edit_info_birth_date"
+            }), 
+            "weight": forms.NumberInput(attrs={
+                "class": "edit_info_weight", 
+                "type": "number", 
+                "maxlength": 3
+            })
+        }

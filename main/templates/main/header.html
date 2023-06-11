@@ -22,7 +22,11 @@
     {% if is_main %}
         <a class="name" href="{% url 'main' %}">ИНГОЗДРАВ</h1>
         {% if title %}
-            <a href="{% url 'area1' %}" class="sign_up_box">{{ title }}</a>
+            <div style="display: flex" class="sign_up_box">
+                <a style="text-decoration: none; color: white; position: relative; right: 10px;" href="{% url 'area1' %}">{{ title }}</a>
+                <img src="{% static 'main/png/person_icon_main.png' %}" style="width: 40px; position: relative; top: -5px">
+            </div>
+            
         {% else %}
             <a href="{% url 'sign_up' %}" class="sign_up_box">Зарегистрироваться</a>
             <a href="{% url 'sign_in' %}" class="sign_in_box">Войти</a>
@@ -30,7 +34,10 @@
     {% else %} 
         <a class="name_not_main" href="{% url 'main' %}">ИНГОЗДРАВ</h1>
         {% if title %}
-            <a href="{% url 'area1' %}" class="sign_up_box_not_main">{{ title }}</a>
+            <div style="display: flex" class="sign_up_box_not_main">
+                <a style="text-decoration: none; color: #165ab7; position: relative; right: 10px;" href="{% url 'area1' %}">{{ title }}</a>
+                <img src="{% static 'main/png/person_icon.png' %}" style="width: 40px; position: relative; top: -5px">
+            </div>
         {% else %}
             <a href="{% url 'sign_up' %}" class="sign_up_box_not_main">Зарегистрироваться</a>
             <a href="{% url 'sign_in' %}" class="sign_in_box_not_main">Войти</a>

@@ -7,12 +7,37 @@
 {% endblock %}
 
 
-
+{% csrf_token %}
 
 
 
 {% block personal_area_content %}
-<h1>Hello</h1>
+<div class="edit_info_main_box">
+    <h2>Редактировать информацию</h2>
+    <form method="POST" action="{% url 'area2' %}">
+        {% csrf_token %}
+        <input name="second_name" type="text" placeholder="Фамилия" class="edit_info_name" value="{{ user.last_name }}">
+        <input name="name" type="text" placeholder="Имя" class="edit_info_name" value="{{ user.first_name }}">
+        
+        <input name="last_name" type="text" placeholder="Отчество" class="edit_info_name" value="{{ user.email }}">
+        
+        <p>Пол:</p>
+        <select name="gender" class="edit_info_gender">
+            <option value="Мужской">Мужской</option>
+            <option value="Женский">Женский</option>
+        </select>
 
+        <p>Дата рождения:</p>
+        <input name="birth_date" type="date" class="edit_info_birth_date">
+
+        <p>Вес:</p>
+        <input name="weight" type="number" step="0.1" class="edit_info_weight">
+
+
+        <button type="submit" class="edit_info_save_button">
+            <p>Сохранить</p>
+        </button>
+    </form>
+</div>
 
 {% endblock %}

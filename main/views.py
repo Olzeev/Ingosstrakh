@@ -77,9 +77,31 @@ def personal_area_main(request):
                                                        "title": get_title(request)})
 
 def personal_area_edit_info(request):
+    if request.method == "POST":
+        form = EditInfoForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            name = form.data["name"]
+            second_name = form.data["second_name"]
+            last_name = form.data["last_name"]
+            user.first_name = name
+            user.last_name = second_name
+            user.email = last_name
+
+            gender = form.data["gender"]
+            birth_date = form.data["birth_date"]
+            weight = form.data["weight"]
+            user.save()
+            print(gender, birth_date, weight)    
+            return redirect('area1') 
+    else:
+        form = EditInfoForm()
+
     return render(request, 'main/personal_area_edit_info.html', {'is_main': False, 
                                                                  'chosen': 2, 
-                                                                 "title": get_title(request)})
+                                                                 "title": get_title(request), 
+                                                                 "form": form, 
+                                                                 "user": request.user})
 
 def personal_area_send_report(request):
     return render(request, 'main/personal_area_send_report.html', {'is_main': False, 

@@ -73,12 +73,8 @@
     font-weight: 500;
     font-size: 15pt;
     right: 20px;
-    color: white;
     text-decoration: none;
     transition: 0.2s;
-}
-.sign_up_box:hover{
-    color: rgb(180, 180, 180);
 }
 
 .sign_up_box_not_main{
@@ -284,4 +280,65 @@
 }
 .personal_area_list_button_quit a:hover{
     color: red;
+}
+
+.edit_info_main_box{
+    font-family: 'Inter';
+}
+.edit_info_main_box p{
+    margin-top: 30px;
+}
+
+.edit_info_name{
+    display: block;
+    width: 300px;
+    height: 30px;
+    font-size: 12pt;
+    margin-top: 10px;
+}
+.edit_info_gender{
+    display: block;
+    width: 100px;
+    height: 30px;
+    transition: 0.2s;
+    font-size: 12pt;
+    border-radius: 5px;
+}
+
+.edit_info_birth_date{
+    font-size: 12pt;
+}
+.edit_info_gender option:focus{
+    background-color: #165ab7;
+}
+
+.edit_info_weight{
+    display: block;
+    width: 100px;
+    height: 30px;
+    font-size: 12pt;
+}
+
+.edit_info_save_button{
+    display: block;
+    position: relative;
+    top: 20px;
+    width: 150px;
+    height: 40px;
+    background-color:#165ab7;
+    color: white;
+    font-family: 'Inter';
+    font-size: 12pt;
+    transition: 0.2s;
+    border-radius: 10px;
+    border: none;
+}
+.edit_info_save_button:hover{
+    background-color: #0d3772;
+    color: grey;
+}
+
+.edit_info_save_button p{
+    position: relative;
+    top: -23px;
 }
