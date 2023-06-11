@@ -73,8 +73,13 @@
     font-weight: 500;
     font-size: 15pt;
     right: 20px;
+    color: white;
     text-decoration: none;
     transition: 0.2s;
+}
+
+.sign_up_box:hover{
+    color: rgb(180, 180, 180);
 }
 
 .sign_up_box_not_main{
