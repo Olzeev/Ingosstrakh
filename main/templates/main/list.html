@@ -1,0 +1,64 @@
+{% extends 'main/header.html' %}
+{% load static %}
+
+{% block content %}
+{% csrf_token %}
+<div class="personal_area_main_box">
+    <div>
+        {% if chosen == 1 %}
+            <div class="personal_area_list_button_chosen">
+                <img src="static/main/png/btn21.png" class="personal_area_list_button_image">
+                <a href="{% url 'area1' %}">Главная</a>
+            </div>
+        {% else %}
+            <div class="personal_area_list_button">
+                <img src="static/main/png/btn11.png" class="personal_area_list_button_image">
+                <a href="{% url 'area1' %}">Главная</a>
+            </div>
+        {% endif %}
+
+        {% if chosen == 2 %}
+            <div class="personal_area_list_button_chosen">
+                <img src="static/main/png/btn22.png" class="personal_area_list_button_image">
+                <a href="{% url 'area2' %}">Редактировать информацию</a>
+            </div>
+        {% else %}  
+            <div class="personal_area_list_button">
+                <img src="static/main/png/btn12.png" class="personal_area_list_button_image">
+                <a href="{% url 'area2' %}">Редактировать информацию</a>
+            </div>
+        {% endif %}
+
+        {% if chosen == 3 %}
+            <div class="personal_area_list_button_chosen">
+                <img src="static/main/png/btn23.png" class="personal_area_list_button_image">
+                <a href="{% url 'area3' %}">Заполнить отчет</a>
+            </div>
+        {% else %}
+            <div class="personal_area_list_button">
+                <img src="static/main/png/btn13.png" class="personal_area_list_button_image">
+                <a href="{% url 'area3' %}">Заполнить отчет</a>
+            </div>
+        {% endif %}
+
+        {% if chosen == 4 %}
+            <div class="personal_area_list_button_chosen">
+                <img src="static/main/png/btn24.png" class="personal_area_list_button_image">
+                <a href="{% url 'area4' %}">Журнал</a>
+            </div>
+        {% else %}
+            <div class="personal_area_list_button">
+                <img src="static/main/png/btn14.png" class="personal_area_list_button_image">
+                <a href="{% url 'area4' %}">Журнал</a>
+            </div>
+        {% endif %}
+        <div class="personal_area_list_button_quit">
+            <img src="static/main/png/btn15.png" class="personal_area_list_button_image">
+            <a href="{% url 'area_quit' %}">Выйти</a>
+        </div>
+    </div>
+    {% block personal_area_content %}
+
+    {% endblock %}
+</div>
+{% endblock %}
