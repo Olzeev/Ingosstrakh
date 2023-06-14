@@ -43,7 +43,7 @@ def health_rating_handler(age, pulse1, pulse2, pulse_prev, pressure1, pressure2,
     Pdelta = abs(Pcurrenty - Pcurrent)
     Pjump = Pdelta * 6 / Pable
 
-    Prating = max(Pjump, Ppercent)
+    Prating =Ppercent
     #print("Ваш рейтинг пульса (максимум из коэффициента скачков пульса и коэффициента отклонения пульса: " + str(Prating))
 
     if (age < 5):

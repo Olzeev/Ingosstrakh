@@ -79,6 +79,7 @@ def sign_in(request):
 
 def personal_area_main(request):
     user_info = UserInfo.objects.get(username=request.user.username)
+    medical_info = MedicalInfo.objects.filter(username=request.user.username)
 
     return render(request, 'main/personal_area.html', {'is_main': False,
                                                        'chosen': 1, 
@@ -86,7 +87,8 @@ def personal_area_main(request):
                                                        "gender": "мужской" if not user_info.gender else "женский", 
                                                        "birth_date": str(user_info.birth_date), 
                                                        "weight": user_info.weight, 
-                                                       "message": user_info.message})
+                                                       "message": user_info.message, 
+                                                       "medical_array": [[i, int((medical_info[i].pulse1 + medical_info[i].pulse2) / 2), f"{medical_info[i].report_datetime.day}.{medical_info[i].report_datetime.month}"] if i < len(medical_info) else [i, 0, ''] for i in range(10)]})
 
 def personal_area_edit_info(request):
     if request.method == "POST":
@@ -160,7 +162,7 @@ def personal_area_send_report(request):
                     birth_date = user_info.birth_date
                     today = date.today()
                     age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
-                    
+                    print(age)
                     if not medical_info.exists():
                         pulse_prev = 60
                     else:

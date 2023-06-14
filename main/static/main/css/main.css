@@ -429,3 +429,49 @@
     position: relative;
     left: 20px;
 }
+
+.message{
+    display:inline-block;
+    width: 80%;
+    height: 70px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px grey;
+    font-size: 15pt;
+    text-align: center;
+    background-color: rgb(218, 238, 255);
+    vertical-align: middle;
+}
+
+.message p{
+    position: relative;
+    color:#165ab7;
+}
+
+.pulse_gisto{
+    display: block;
+    position: relative;
+    top: 20px;
+    width: 400px;
+    height: 350px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px grey;
+}
+.pulse_gisto_title{
+    text-align: center;
+    position: relative;
+    top: 10px;
+}
+
+.gisto{
+    display: flex;
+}
+
+.gisto_column{
+    display: block;
+    position: relative;
+    width: 20px;
+    height: 0px;
+    margin-left: 15px;
+    background-color: red;
+    border-radius: 7px;
+}

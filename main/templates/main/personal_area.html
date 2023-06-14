@@ -7,10 +7,6 @@
 {% endblock %}
 
 
-
-
-
-
 {% block personal_area_content %}
 
 <div class="personal_area_content">
@@ -18,7 +14,23 @@
     <p>Пол: {{ gender }}</p>
     <p>Дата рождения (ГГГГ-ММ-ДД): {{ birth_date }}</p>
     <p>Вес: {{ weight }} кг</p>
-    <p>{{ message }}</p>
+    <div class="message">
+        <p>{{ message }}</p>
+    </div>
+    
+    <div class="pulse_gisto">
+        <h3 class="pulse_gisto_title">Пульс</h3>
+        <div class="gisto">
+            {% for report in medical_array %} 
+                <div>
+                    <p style="position: relative; left: 15px;" id="pulse_{{ report.0 }}">{{ report.1 }}</p>
+                    <div id="pulse_column_{{ report.0 }}" class="gisto_column"></div>
+                    <p style="position: relative; font-size: 10pt; left: 10px;" id="pulse_date_{{report.0}}">{{ report.2 }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="{% static 'main/js/script.js' %}"></script>
 </div>
 
 
