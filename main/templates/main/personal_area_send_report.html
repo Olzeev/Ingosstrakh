@@ -11,21 +11,33 @@
 {% block personal_area_content %}
 
 <div class="send_report_main_box">
-    <h2>Отправить отчет за {{ datetime.day }}.{{ datetime.month }}.{{ datetime.year }} ({{ datetime.hour }}:{{ datetime.minute }})</h2>
+    <h2>Отправить отчет за {{ datetime.day }}.{{ datetime.month }}.{{ datetime.year }}</h2>
+    <p>Внимание! Очет нужно заполнять один раз в день каждый день. В нем указываются 2 измерения, которые должны быть сделаны в этот же день с перерывом в один час.</p>
     <form method="POST" action="{% url 'area3' %}">
         {% csrf_token %}
-        <input type="number" min=10 max=250 name="pulse" placeholder="Пульс" class="report_pulse_input">
-        <p>Давление:</p>
+        <p>Пульс (1 измерение):</p>
+        <input type="number" min=10 max=250 name="pulse1" class="report_pulse_input">
+        <p>Давление (1 измерение):</p>
         <div style="display: flex;">
             <input type="number" min=10 max=400 name="preassure2" placeholder="Верхнее" class="report_preassure_input">
             <input type="number" min=10 max=400 name="preassure1" placeholder="Нижнее" class="report_preassure_input" style="margin-left: 10px">
         </div>
+        <p>Пульс (2 измерение):</p>
+        <input type="number" min=10 max=250 name="pulse2" class="report_pulse_input">
+        
+
+        <p>Давление (2 измерение):</p>
+        <div style="display: flex;">
+            <input type="number" min=10 max=400 name="preassure4" placeholder="Верхнее" class="report_preassure_input">
+            <input type="number" min=10 max=400 name="preassure3" placeholder="Нижнее" class="report_preassure_input" style="margin-left: 10px">
+        </div>
+
         <p style="color: red;">{{ error }}</p>
         
         <button type="submit" class="send_report_button">
             <p>Отправить</p>
         </button>
-        <p style="position: relative; top: 20px">Если вы еще не отправляли отчет сегодня, то сделайте это через час.</p>
+        
     </form>
 </div>
 

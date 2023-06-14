@@ -20,9 +20,13 @@
             
             <div class="log_report_info">
                 <img src="{% static 'main/png/heartbeat.png' %}" class="log_report_image">
-                <p>{{ report.pulse }}</p>
-                <img src="{% static 'main/png/pressure.png' %}" class="log_report_image" style="left: 100px">
-                <p style="left: 120px;">{{ report.preassure2 }}/{{ report.preassure1 }}</p>
+                <p>{{ report.pulse1 }}, {{ report.pulse2 }}</p>
+                
+            </div>
+            <div class="log_report_info">
+                <img src="{% static 'main/png/pressure.png' %}" class="log_report_image">
+                <p>{{ report.preassure2 }}/{{ report.preassure1 }}, {{ report.preassure4 }}/{{ report.preassure3 }}</p>
+                
             </div>
             
         </div>

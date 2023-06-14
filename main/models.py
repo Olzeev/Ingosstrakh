@@ -6,6 +6,7 @@ class UserInfo(models.Model):
     birth_date = models.DateField(default=date.today())
     weight = models.IntegerField(default=0)
     gender = models.BooleanField(default=0) # мужской по дефолту
+    message = models.TextField(default="Вы еще не отправляли ни одного отчета")
 
     def __str__(self):
         return f"{self.username}"
@@ -17,9 +18,13 @@ class UserInfo(models.Model):
 class MedicalInfo(models.Model):
     username = models.CharField(max_length=30)
     report_datetime = models.DateTimeField()
-    pulse = models.IntegerField()
+    pulse1 = models.IntegerField()
+    pulse2 = models.IntegerField()
     preassure1 = models.IntegerField()
     preassure2 = models.IntegerField()
+    preassure3 = models.IntegerField()
+    preassure4 = models.IntegerField()
+    rating = models.IntegerField()
 
     def __str__(self):
         return f"{self.username} ({self.report_datetime})"

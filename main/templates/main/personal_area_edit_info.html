@@ -14,6 +14,7 @@
 {% block personal_area_content %}
 <div class="edit_info_main_box">
     <h2>Редактировать информацию</h2>
+    <p>Внимание! Просим указывать настоящие данные, т.к. они влияют на оценку вашего физического состояния.</p>
     <form method="POST" action="{% url 'area2' %}">
         {% csrf_token %}
         <input name="second_name" type="text" placeholder="Фамилия" class="edit_info_name" value="{{ user.last_name }}">

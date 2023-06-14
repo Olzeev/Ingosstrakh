@@ -4,7 +4,8 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth import models as django_models
 from .forms import *
 from .models import *
-
+from datetime import datetime
+from .health_handler import health_rating_handler
 
 def get_title(request):
     if request.user.is_authenticated:
@@ -75,14 +76,17 @@ def sign_in(request):
                                                "error": error, 
                                                "title": get_title(request)})
 
+
 def personal_area_main(request):
     user_info = UserInfo.objects.get(username=request.user.username)
+
     return render(request, 'main/personal_area.html', {'is_main': False,
                                                        'chosen': 1, 
                                                        "title": get_title(request), 
                                                        "gender": "мужской" if not user_info.gender else "женский", 
                                                        "birth_date": str(user_info.birth_date), 
-                                                       "weight": user_info.weight})
+                                                       "weight": user_info.weight, 
+                                                       "message": user_info.message})
 
 def personal_area_edit_info(request):
     if request.method == "POST":
@@ -127,21 +131,59 @@ def personal_area_edit_info(request):
                                                                  "gender": user_info.gender})
 
 
+def check_date(date):
+    if datetime.today().year == date.year and datetime.today().month == date.month and datetime.today().day == date.day:
+        return True
+    return False
+
+
 def personal_area_send_report(request):
     error = ''
     if request.method == "POST":
         form = ReportForm(request.POST)
         
         if form.is_valid():
-            pulse = form.data["pulse"]
-            preassure1 = form.data["preassure1"]
-            preassure2 = form.data["preassure2"]
-            if pulse and preassure1 and preassure2:
-                Report = MedicalInfo(username=request.user.username, pulse=pulse, preassure1=preassure1, preassure2=preassure2, report_datetime=datetime.now())
-                Report.save()
-                return redirect('area1')
+            medical_info = MedicalInfo.objects.filter(username=request.user.username)
+            if False: #medical_info.exists() and check_date(MedicalInfo.objects.filter(username=request.user.username).order_by("-report_datetime")[0].report_datetime):
+                error = 'Вы уже заполняли отчет сегодня!'
             else:
-                error = 'Заполните все данные!'
+                pulse1 = int(form.data["pulse1"])
+                pulse2 = int(form.data["pulse2"])
+                preassure1 = int(form.data["preassure1"])
+                preassure2 = int(form.data["preassure2"])
+                preassure3 = int(form.data["preassure3"])
+                preassure4 = int(form.data["preassure4"])
+                if pulse1 and pulse2 and preassure1 and preassure2 and preassure3 and preassure4:
+                    medical_info = MedicalInfo.objects.filter(username=request.user.username)
+                    user_info = UserInfo.objects.get(username=request.user.username)
+
+                    birth_date = user_info.birth_date
+                    today = date.today()
+                    age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
+                    
+                    if not medical_info.exists():
+                        pulse_prev = 60
+                    else:
+                        last_report = medical_info.order_by("-report_datetime")[0]
+                        pulse_prev = (last_report.pulse1 + last_report.pulse2) / 2
+
+                    all_hratings = [report.rating for report in medical_info]
+                    
+                    [message, hrating] = health_rating_handler(age, pulse1, pulse2, pulse_prev, preassure1, preassure2, preassure3, preassure4, all_hratings)
+                    
+
+                    user_info.message = message
+                    user_info.save()
+                    Report = MedicalInfo(username=request.user.username, 
+                                        pulse1=pulse1, pulse2=pulse2,
+                                        preassure1=preassure1, preassure2=preassure2, 
+                                        preassure3=preassure3, preassure4=preassure4, 
+                                        report_datetime=datetime.now(), rating=hrating)
+                    Report.save()
+                    
+                    return redirect('area1')
+                else:
+                    error = 'Заполните все данные!'
         else:
             error = 'Форма некорректна!'
     else:

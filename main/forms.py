@@ -86,7 +86,12 @@ class ReportForm(forms.Form):
         fields = ["pulse", "preassure1", "preassure2"]
 
         widgets = {
-            "pulse": forms.TextInput(attrs={
+            "pulse1": forms.TextInput(attrs={
+                "class": "report_pulse_input", 
+                "placeholder": "Пульс", 
+                "type": "number"
+            }), 
+            "pulse2": forms.TextInput(attrs={
                 "class": "report_pulse_input", 
                 "placeholder": "Пульс", 
                 "type": "number"
@@ -101,4 +106,14 @@ class ReportForm(forms.Form):
                 "placeholder": "Нижнее", 
                 "type": "number"
             }), 
+            "preassure3": forms.TextInput(attrs={
+                "class": "report_preassure_input", 
+                "placeholder": "Верхнее", 
+                "type": "number"
+            }), 
+            "preassure4": forms.TextInput(attrs={
+                "class": "report_preassure_input", 
+                "placeholder": "Нижнее", 
+                "type": "number"
+            })
         }
