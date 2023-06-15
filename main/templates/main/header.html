@@ -20,7 +20,7 @@
 
 <div class="main_box">
     {% if is_main %}
-        <a class="name" href="{% url 'main' %}">ИНГОЗДРАВ</h1>
+        <a class="name" href="{% url 'main' %}">ИНГОСЗДРАВ</h1>
         {% if title %}
             <div style="display: flex" class="sign_up_box">
                 <a style="text-decoration: none; color: white; position: relative; right: 10px;" href="{% url 'area1' %}">{{ title }}</a>
@@ -32,7 +32,7 @@
             <a href="{% url 'sign_in' %}" class="sign_in_box">Войти</a>
         {% endif %}
     {% else %} 
-        <a class="name_not_main" href="{% url 'main' %}">ИНГОЗДРАВ</h1>
+        <a class="name_not_main" href="{% url 'main' %}">ИНГОCЗДРАВ</h1>
         {% if title %}
             <div style="display: flex" class="sign_up_box_not_main">
                 <a style="text-decoration: none; color: #165ab7; position: relative; right: 10px;" href="{% url 'area1' %}">{{ title }}</a>
