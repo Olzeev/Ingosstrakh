@@ -18,19 +18,60 @@
         <p>{{ message }}</p>
     </div>
     
-    <div class="pulse_gisto">
-        <h3 class="pulse_gisto_title">Пульс</h3>
-        <div class="gisto">
-            {% for report in medical_array %} 
-                <div>
-                    <p style="position: relative; left: 15px;" id="pulse_{{ report.0 }}">{{ report.1 }}</p>
-                    <div id="pulse_column_{{ report.0 }}" class="gisto_column"></div>
-                    <p style="position: relative; font-size: 10pt; left: 10px;" id="pulse_date_{{report.0}}">{{ report.2 }}</p>
-                </div>
-            {% endfor %}
+    <div style="display: flex">
+        <div class="pulse_gisto">
+            <h3 class="pulse_gisto_title">Пульс</h3>
+            <div class="pulse_gisto_background">
+                <div style="width: 380px; height: 2px; background-color: rgb(200, 200, 200); margin-top: 28px; margin-left: 20px;"></div>
+                <div style="width: 380px; height: 2px; background-color: rgb(200, 200, 200); margin-top: 28px; margin-left: 20px;"></div>
+                <div style="width: 380px; height: 2px; background-color: rgb(200, 200, 200); margin-top: 28px; margin-left: 20px;"></div>
+                <div style="width: 380px; height: 2px; background-color: rgb(200, 200, 200); margin-top: 28px; margin-left: 20px;"></div>
+                <div style="width: 380px; height: 2px; background-color: rgb(200, 200, 200); margin-top: 28px; margin-left: 20px;"></div>
+                <div style="width: 380px; height: 2px; background-color: rgb(200, 200, 200); margin-top: 28px; margin-left: 20px;"></div>
+            </div>
+            
+            <div class="gisto">
+                {% for report in pulse_array %} 
+                    <div>
+                        <div style="display: flex; font-size: 10pt;">
+                            <p style="position: relative; left: 12px;" id="pulse1_{{ report.0 }}">{{ report.1 }}</p>
+                            <p style="position: relative; left: 19px;" id="pulse2_{{ report.0 }}">{{ report.2 }}</p>
+                        </div>
+                        <div style="display: flex">
+                            <div id="pulse_column1_{{ report.0 }}" class="gisto_column"></div>
+                            <div id="pulse_column2_{{ report.0 }}" class="gisto_column" style="margin-left: 2px"></div>
+                        </div>
+                        <p style="position: relative; font-size: 10pt; left: 25px;" id="pulse_date_{{report.0}}">{{ report.3 }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="rating_gisto">
+            <h3 class="pulse_gisto_title">Рейтинг здоровья</h3>
+            <div class="pulse_gisto_background">
+                <div style="width: 380px; height: 2px; background-color: rgb(200, 200, 200); margin-top: 28px; margin-left: 20px;"></div>
+                <div style="width: 380px; height: 2px; background-color: rgb(200, 200, 200); margin-top: 28px; margin-left: 20px;"></div>
+                <div style="width: 380px; height: 2px; background-color: rgb(200, 200, 200); margin-top: 28px; margin-left: 20px;"></div>
+                <div style="width: 380px; height: 2px; background-color: rgb(200, 200, 200); margin-top: 28px; margin-left: 20px;"></div>
+                <div style="width: 380px; height: 2px; background-color: rgb(200, 200, 200); margin-top: 28px; margin-left: 20px;"></div>
+                <div style="width: 380px; height: 2px; background-color: rgb(200, 200, 200); margin-top: 28px; margin-left: 20px;"></div>
+            </div>
+
+            <div class="gisto">
+                {% for report in rating_array %} 
+                    <div>
+                        <p style="position: relative; left: 35px;" id="rating_{{ report.0 }}">{{ report.1 }}</p>
+                        <div id="rating_column_{{ report.0 }}" class="gisto_rating_column"></div>
+                        <p style="position: relative; font-size: 10pt; left: 35px;" id="rating_date_{{report.0}}">{{ report.2 }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+
         </div>
     </div>
     <script src="{% static 'main/js/script.js' %}"></script>
+    <p style="position: relative; top: 20px">Внимание! Чем меньше ваш рейтинг здоровья, тем лучше ваше физическое состояние.</p>
 </div>
 
 

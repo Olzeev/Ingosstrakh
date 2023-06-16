@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth import models as django_models
 from .forms import *
 from .models import *
-from datetime import datetime
+from datetime import datetime, timedelta
 from .health_handler import health_rating_handler
 
 def get_title(request):
@@ -81,14 +81,34 @@ def personal_area_main(request):
     user_info = UserInfo.objects.get(username=request.user.username)
     medical_info = MedicalInfo.objects.filter(username=request.user.username)
 
-    return render(request, 'main/personal_area.html', {'is_main': False,
+    pulse_array = []
+    rating_array = []
+    d = {}
+    for report in medical_info:
+        print(report.report_datetime)
+        d[datetime(year=report.report_datetime.year, month=report.report_datetime.month, day=report.report_datetime.day).date()] = report
+    
+    date = (datetime.today() - timedelta(days=6)).date()
+    
+    for i in range(7):
+        
+        if date in d.keys():
+            pulse_array.append([i, d[date].pulse1, d[date].pulse2, f"{date.day}.{date.month}"])
+            rating_array.append([i, d[date].rating, f"{date.day}.{date.month}"])
+        else:
+            pulse_array.append([i, 0, 0, f"{date.day}.{date.month}"])
+            rating_array.append([i, -1, f"{date.day}.{date.month}"])
+        date += timedelta(days=1)
+
+    return render(request, 'main/personal_area.html', {'is_main': False, 
                                                        'chosen': 1, 
                                                        "title": get_title(request), 
                                                        "gender": "мужской" if not user_info.gender else "женский", 
                                                        "birth_date": str(user_info.birth_date), 
                                                        "weight": user_info.weight, 
                                                        "message": user_info.message, 
-                                                       "medical_array": [[i, int((medical_info[i].pulse1 + medical_info[i].pulse2) / 2), f"{medical_info[i].report_datetime.day}.{medical_info[i].report_datetime.month}"] if i < len(medical_info) else [i, 0, ''] for i in range(10)]})
+                                                       "pulse_array": pulse_array, 
+                                                       "rating_array": rating_array})
 
 def personal_area_edit_info(request):
     if request.method == "POST":
@@ -146,7 +166,7 @@ def personal_area_send_report(request):
         
         if form.is_valid():
             medical_info = MedicalInfo.objects.filter(username=request.user.username)
-            if False: #medical_info.exists() and check_date(MedicalInfo.objects.filter(username=request.user.username).order_by("-report_datetime")[0].report_datetime):
+            if medical_info.exists() and not check_date(MedicalInfo.objects.filter(username=request.user.username).order_by("report_datetime")[0].report_datetime):
                 error = 'Вы уже заполняли отчет сегодня!'
             else:
                 pulse1 = int(form.data["pulse1"])
