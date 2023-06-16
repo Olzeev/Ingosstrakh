@@ -85,6 +85,7 @@ def personal_area_main(request):
     rating_array = []
     d = {}
     for report in medical_info:
+        print(report.report_datetime)
         d[datetime(year=report.report_datetime.year, month=report.report_datetime.month, day=report.report_datetime.day).date()] = report
     
     date = (datetime.today() - timedelta(days=6)).date()
@@ -98,8 +99,6 @@ def personal_area_main(request):
             pulse_array.append([i, 0, 0, f"{date.day}.{date.month}"])
             rating_array.append([i, -1, f"{date.day}.{date.month}"])
         date += timedelta(days=1)
-
-    
 
     return render(request, 'main/personal_area.html', {'is_main': False, 
                                                        'chosen': 1, 
@@ -167,7 +166,7 @@ def personal_area_send_report(request):
         
         if form.is_valid():
             medical_info = MedicalInfo.objects.filter(username=request.user.username)
-            if False: #medical_info.exists() and check_date(MedicalInfo.objects.filter(username=request.user.username).order_by("-report_datetime")[0].report_datetime):
+            if medical_info.exists() and not check_date(MedicalInfo.objects.filter(username=request.user.username).order_by("report_datetime")[0].report_datetime):
                 error = 'Вы уже заполняли отчет сегодня!'
             else:
                 pulse1 = int(form.data["pulse1"])
