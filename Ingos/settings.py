@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-%4$*d*ss#n@zyoz1av0j!sw_@eq4y1225khi-dmfr+%3&u_+jb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["ingos-med.site", "158.160.40.118"]
 
 
 # Application definition
@@ -118,6 +118,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT =  '/var/www/ingos-med.site/html/static'
 LOGIN_REDIRECT_URL = '/'
 
 # Default primary key field type
